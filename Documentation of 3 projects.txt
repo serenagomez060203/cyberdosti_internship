@@ -1,0 +1,149 @@
+Project 1: TEXT ENCRYPTION-
+Index.html:
+•  <!doctype html>: Declares the document type and version.
+•  <html lang="en">: Specifies the HTML document's language (English).
+•  <head>: Contains meta information about the HTML document.
+•  <meta charset="UTF-8">: Sets the character encoding to UTF-8.
+•  <meta name="viewport" content="width=device-width, initial-scale=1.0">: Ensures proper rendering and scaling on different devices.
+•  <title>Text Encryption</title>: Sets the title of the webpage.
+•  <body>: Contains the visible content of the HTML document.
+•  <h1>Text Encryption and Decryption</h1>: Heading that describes the purpose of the page.
+•  First <form>: Form for encrypting text. action="/encrypt" specifies the endpoint to handle encryption, and method="POST" indicates the HTTP method.
+•  <label for="text">Text to Encrypt:</label>: Label for the input field.
+•  <input type="text" name="text" required>: Text input field where users enter text to encrypt (name="text" identifies the input for server-side processing, required attribute ensures it cannot be empty).
+•  <button type="submit">Encrypt</button>: Submit button for the encryption form.
+•  Second <form>: Form for decrypting text. action="/decrypt" specifies the endpoint to handle decryption.
+•  <label for="text">Text to Decrypt:</label>: Label for the input field.
+•  <input type="text" name="text" required>: Text input field for decrypting text.
+•  <button type="submit">Decrypt</button>: Submit button for the decryption form.
+
+result.html:
+•  Similar structure to index.html but with different content.
+•  <h1>{{ action }} Text</h1>: Displays the action (either "Encrypted" or "Decrypted") based on the context passed from Flask.
+•  <p>{{ result }}</p>: Displays the encrypted or decrypted text result passed from Flask.
+•  <a href="/">Go Back</a>: Provides a link to return to the main page (/).
+
+app.py:
+•  from flask import Flask, render_template, request, redirect, url_for: Imports necessary Flask modules for creating a web application.
+•  from cryptography.fernet import Fernet: Imports Fernet from the cryptography library for encryption and decryption.
+•  import os: Imports the os module for operating system functionalities.
+•  app = Flask(__name__): Creates a Flask application instance with the name of the module (__name__).
+•  app.secret_key = os.urandom(24): Sets a secret key for the Flask application to enable session management.
+•  key = Fernet.generate_key(): Generates a symmetric encryption key using Fernet.
+•  cipher_suite = Fernet(key): Creates a Fernet cipher suite using the generated key.
+•  @app.route('/'): Decorator that registers the / route for the index function.
+•  def index():: Function that renders index.html, the main page with forms for encryption and decryption.
+•  @app.route('/encrypt', methods=['POST']): Decorator for the /encrypt endpoint that handles encryption when receiving a POST request.
+•  def encrypt():: Function that retrieves text from the form, encrypts it, and renders result.html with the encrypted text.
+•  @app.route('/decrypt', methods=['POST']): Decorator for the /decrypt endpoint that handles decryption when receiving a POST request.
+•  def decrypt():: Function that retrieves text from the form, decrypts it, and renders result.html with the decrypted text.
+•  if __name__ == '__main__':: Condition that ensures the Flask app runs only if executed directly (not imported as a module).
+•  app.run(debug=True): Starts the Flask application in debug mode for development.
+
+Step 1: Install Necessary Python Packages
+In the terminal, install Flask and cryptography using pip and setup virtual environment:
+pip install Flask cryptography
+python –m venv
+Step 2: Run the Flask Application
+Run the Flask app from the terminal:
+python app.py
+The application will start running at http://127.0.0.1:5000/. Open this URL in your web browser to access the text encryption and decryption tool.
+
+Summary
+•	index.html: HTML form to input text for encryption and decryption.
+•	result.html: HTML template to display the result of encryption or decryption.
+•	app.py: Flask application that handles the encryption and decryption using the Fernet symmetric encryption provided by the cryptography package.
+
+Project 2: PASSWORD GENERATOR-
+index.html
+•	<!DOCTYPE html>: Declares the document type and version of HTML (HTML5 in this case).
+•	<html lang="en">: Specifies the language of the document as English.
+Head Section:
+•	<head>: Contains metadata about the HTML document.
+o	<meta charset="UTF-8">: Defines the character encoding for the document as UTF-8 (Unicode).
+o	<meta name="viewport" content="width=device-width, initial-scale=1.0">: Sets the viewport width to the device's width and initial zoom level to 1.
+o	<title>Random Password Generator</title>: Sets the title of the webpage displayed in the browser tab.
+o	<link rel="stylesheet" href="styles.css">: Links to an external CSS file (styles.css) to apply styles to the HTML document.
+Body Section:
+•	<body>: Contains the visible content of the HTML document.
+o	<div class="container">: A container for the entire content, providing structure and styling.
+	<h1>Random Password Generator</h1>: Main heading displaying the title of the application.
+	<p>No cookies, no trackers.<br>Just passwords.</p>: Paragraph explaining the privacy aspect of the application.
+	<div class="generator">: Section containing the password generation interface.
+	<div class="options">: Container for password generation options.
+	Checkboxes (<input type="checkbox">) labeled with character sets: uppercase letters, lowercase letters, numbers, symbols, and extended symbols.
+	<div class="length">: Section for setting password length.
+	<input type="range" id="length" min="1" max="50" value="16">: Range input to select password length from 1 to 50 characters, defaulting to 16.
+	<input type="number" id="lengthValue" min="1" max="50" value="16">: Number input displaying and syncing with the range input.
+	<button id="generate">Generate</button>: Button triggering the password generation.
+	<input type="text" id="password" readonly>: Text input displaying the generated password, set to read-only mode.
+
+JavaScript (script.js)
+•	document.getElementById('generate').addEventListener('click', generatePassword);: Attaches an event listener to the 'Generate' button, invoking the generatePassword function when clicked.
+•	document.getElementById('length').addEventListener('input', syncLength);: Attaches an event listener to the range input for password length, invoking the syncLength function on input change.
+•	document.getElementById('lengthValue').addEventListener('input', syncLength);: Attaches an event listener to the number input for password length, also invoking the syncLength function on input change.
+o	function syncLength(e) { ... }: Updates the value of the range and number inputs to stay synchronized when the user changes the password length interactively.
+o	function generatePassword() { ... }: Generates a random password based on the selected options (uppercase, lowercase, numbers, symbols, and extended symbols), using the specified length. Displays the generated password in the read-only text input.
+
+CSS (styles.css)
+•	Defines styles for various HTML elements and classes used in the index.html file, including:
+o	Overall body styling (background color, text color, font family).
+o	.container styling for margin positioning.
+o	.generator styling for layout and appearance.
+o	Styling for .options, .length, #password, and button elements to control their appearance, layout, and interaction states (hover effects).
+
+Click on index.html to check the web application.
+
+Summary of Each File
+•	index.html: Defines the structure and content of the web page. It includes checkboxes for password options, a slider and numeric input for password length, a button to generate passwords, and an input field to display the generated password.
+•	script.js: Provides functionality to the webpage. It adds event listeners to handle user interactions, synchronizes inputs for password length selection, generates passwords based on user-selected options, and updates the display of the generated password.
+•	styles.css: Styles the HTML elements to improve visual presentation. It sets colors, fonts, alignments, margins, borders, and other visual properties to enhance the appearance of the password generator application.
+
+Project 3: BRUTE FORCE PASSWORD CRACKER-
+App.py:
+•	import itertools
+o	Imports the itertools module, which provides functions to work with iterators for efficient looping.
+•	import string
+o	Imports the string module, which provides constants and classes for manipulating strings of characters.
+•	def brute_force_password_cracker(target_password, max_length=8):
+o	Defines a function named brute_force_password_cracker that takes two parameters:
+	target_password: The password that needs to be cracked.
+	max_length: Maximum length of the password to try (default is 8).
+•	characters = string.ascii_lowercase
+o	Initializes characters to contain all lowercase letters from the alphabet ('abcdefghijklmnopqrstuvwxyz').
+•	attempts = 0
+o	Initializes the variable attempts to keep track of the number of attempts made to crack the password.
+•	for length in range(1, max_length + 1):
+o	Outer loop that iterates through different lengths of passwords, from 1 up to max_length.
+•	for guess in itertools.product(characters, repeat=length):
+o	Inner loop that uses itertools.product to generate all possible combinations (cartesian product) of characters for the current length.
+•	attempts += 1
+o	Increments the attempts counter for each password attempt.
+•	guess_password = ''.join(guess)
+o	Converts the tuple guess (generated by itertools.product) into a string guess_password.
+•	if guess_password == target_password:
+o	Checks if the generated guess_password matches the target_password.
+•	return guess_password, attempts
+o	Returns the cracked password and the number of attempts if the password is successfully cracked.
+•	return None, attempts
+o	Returns None and the number of attempts if the password is not cracked within the specified max_length.
+•	target_password = "abc"
+o	Example usage: Sets target_password to the password you want to crack. Replace "abc" with the actual password you want to test.
+•	max_length = 8
+o	Example usage: Sets max_length to the maximum number of characters to attempt for cracking the password.
+•	cracked_password, attempts = brute_force_password_cracker(target_password, max_length)
+o	Calls the brute_force_password_cracker function with target_password and max_length, and assigns the returned values (cracked_password and attempts) to variables.
+•	if cracked_password:
+o	Checks if cracked_password is not None, indicating that the password was successfully cracked.
+•	print(f"Password cracked: {cracked_password} in {attempts} attempts.")
+o	Prints the cracked password and the number of attempts if the password is successfully cracked.
+•	else:
+o	Executes if the password is not cracked within the specified max_length.
+•	print(f"Password not cracked within length {max_length}.")
+o	Prints a message indicating that the password could not be cracked within the specified maximum length.
+
+Run this applicaton by going to the terminal and type ‘python app.py’
+
+Summary:
+This script demonstrates a simple brute-force approach to password cracking using lowercase letters. It iteratively generates all possible combinations of letters up to a specified maximum length (max_length) and checks each combination against a target password (target_password). It tracks the number of attempts made and prints whether the password was successfully cracked or not.
+

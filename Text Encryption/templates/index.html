@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Encryption</title>
+</head>
+<body>
+    <h1>Text Encryption and Decryption</h1>
+    <form action="/encrypt" method="POST">
+        <label for="text">Text to Encrypt:</label>
+        <input type="text" name="text" required>
+        <button type="submit">Encrypt</button>
+    </form>
+    <br>
+    <form action="/decrypt" method="POST">
+        <label for="text">Text to Decrypt:</label>
+        <input type="text" name="text" required>
+        <button type="submit">Decrypt</button>
+    </form>
+</body>
+</html>

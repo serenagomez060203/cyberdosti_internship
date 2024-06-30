@@ -1,0 +1,51 @@
+body {
+    background-color: black;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.generator {
+    display: inline-block;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.options label {
+    display: block;
+    margin: 5px 0;
+}
+
+.length {
+    margin: 10px 0;
+}
+
+#password {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    background-color: #222;
+    color: #0f0;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0f0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0a0;
+}
