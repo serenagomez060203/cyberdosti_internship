@@ -1,4 +1,4 @@
-# INTERNSHIP1
+# INTERNSHIP MONTH 1
 
 ## Project 1: Text Encryption
 
