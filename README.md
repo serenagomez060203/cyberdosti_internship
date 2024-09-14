@@ -1,5 +1,4 @@
-# CYBERDOSTI INTERNSHIP MONTH 1
-
+# INTERNSHIP1
 
 ## Project 1: Text Encryption
 
